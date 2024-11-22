@@ -1,15 +1,22 @@
 version: "2.1"
 orbs:
   cypress: cypress-io/cypress@3
+
+executors:
+  cypress-executor:
+    docker:
+      - image: img/node:18.17.0
+
 jobs:
   run-cypress-in-specified-node-version:
-    executor:
-      name: cypress/default
-      node-version: "^18.17.0"
+    executor: cypress-executor
+    steps:
+      - checkout
+      - cypress/run:
+          cypress-command: npx wait-on@latest http://localhost:3001 && npx cypress run
+          start-command: npm run build && npm run start
 
 workflows:
   use-my-orb:
     jobs:
-      - cypress/run:
-          cypress-command: npx wait-on@latest http://localhost:3001 && npx cypress run
-          start-command: npm run build && npm run start
+      - run-cypress-in-specified-node-version
