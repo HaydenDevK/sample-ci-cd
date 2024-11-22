@@ -1,14 +1,10 @@
-import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom";
 import Page from "../src/app/page";
-import { describe } from "node:test";
 
 describe("Page", () => {
-  it("renders a heading", () => {
+  it("renders the page", () => {
     render(<Page />);
-
-    const home = screen.getByText("Get started by editing");
-
-    expect(home).toBeInTheDocument();
+    expect(screen.getByText("Get started by editing")).toBeInTheDocument();
   });
 });
