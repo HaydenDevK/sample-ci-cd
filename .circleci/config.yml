@@ -2,16 +2,16 @@ version: "2.1"
 orbs:
   cypress: cypress-io/cypress@3
 jobs:
-  cypress-run:
+  custom:
     executor:
       name: cypress/default
       node-version: "20.6.0"
     steps:
       - cypress/install
       - cypress/run-tests:
-          cypress-command: npx wait-on@latest http://localhost:3000 && npx cypress run
-          start-command: npm run build && npm run start
+          cypress-command: "npx wait-on@latest http://localhost:3000 && npx cypress run"
+          start-command: "npm run build && npm run start"
 workflows:
   use-my-orb:
     jobs:
-      - cypress-run
+      - custom
