@@ -1,7 +1,7 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse } from "next/server";
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
-  const { body } = req;
+export async function GET(request: Request) {
+  const { body } = request;
 
   alert(body);
   console.log(body);
@@ -17,5 +17,5 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
       body: JSON.stringify({ content: "hi" }),
     }
   );
-  return res.send(`Hello ${body.name}, you just parsed the request body!`);
+  return NextResponse.json({});
 }
